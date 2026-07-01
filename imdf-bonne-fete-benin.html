@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0B0E17" />
+  <title>Bonne fête de fin d’année — IMDF</title>
+  <style>
+    :root{
+      --bg:#0B0E17;
+      --card:rgba(255,255,255,.08);
+      --card2:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --green:#0B8A4A;  /* Benin green */
+      --yellow:#F7D51D; /* Benin yellow */
+      --red:#D81E2B;    /* Benin red */
+      --ring: rgba(247,213,29,.45);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 15% 10%, rgba(247,213,29,.22), transparent 60%),
+                  radial-gradient(900px 700px at 90% 20%, rgba(216,30,43,.20), transparent 55%),
+                  radial-gradient(1000px 800px at 55% 95%, rgba(11,138,74,.18), transparent 55%),
+                  linear-gradient(180deg, #070914 0%, #0B0E17 60%, #060712 100%);
+      overflow-x:hidden;
+    }
+
+    /* Subtle animated glow */
+    .glow{
+      position:fixed; inset:-10%;
+      background:
+        radial-gradient(600px 500px at 20% 20%, rgba(247,213,29,.18), transparent 65%),
+        radial-gradient(520px 520px at 80% 25%, rgba(216,30,43,.14), transparent 60%),
+        radial-gradient(560px 560px at 55% 80%, rgba(11,138,74,.14), transparent 60%);
+      filter: blur(18px);
+      opacity:.9;
+      pointer-events:none;
+      animation: drift 16s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    @keyframes drift{
+      0%{ transform: translate3d(-1%, -1%, 0) scale(1.02) }
+      100%{ transform: translate3d(1.2%, 1%, 0) scale(1.05) }
+    }
+
+    /* Top nav */
+    .nav{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(11,14,23,.78), rgba(11,14,23,.35));
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width:0;
+    }
+    .brand img{
+      /* width:36px;  */
+      height:36px; 
+      border-radius:12px;
+      background: rgba(255,255,255,.95);
+      padding:7px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.35);
+    }
+    .brand .t{
+      display:flex; flex-direction:column; line-height:1.05; min-width:0;
+    }
+    .brand .t strong{ font-size:14px; letter-spacing:.2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .brand .t span{ font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size:13px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: conic-gradient(from 180deg, var(--green), var(--yellow), var(--red), var(--green));
+      box-shadow: 0 0 0 4px rgba(255,255,255,.05);
+    }
+
+    /* Layout */
+    .wrap{ max-width:1100px; margin:0 auto; padding: 26px 18px 70px; }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items:stretch;
+      margin-top: 18px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Hero card */
+    .hero{
+      position:relative;
+      border-radius: 26px;
+      padding: 26px 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      isolation:isolate;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(500px 280px at 18% 20%, rgba(247,213,29,.22), transparent 60%),
+        radial-gradient(600px 380px at 85% 30%, rgba(216,30,43,.18), transparent 62%),
+        radial-gradient(600px 420px at 45% 110%, rgba(11,138,74,.18), transparent 62%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+      z-index:-1;
+      filter: blur(0px);
+    }
+
+    .badge{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.12);
+      font-size: 13px;
+      color: var(--muted);
+      width: fit-content;
+    }
+    .flag{
+      width: 20px; height: 14px; border-radius: 3px; overflow:hidden;
+      box-shadow: 0 0 0 3px rgba(255,255,255,.06);
+      background:
+        linear-gradient(90deg, var(--green) 0 40%, transparent 40% 100%),
+        linear-gradient(180deg, var(--yellow) 0 50%, var(--red) 50% 100%);
+    }
+
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(28px, 4.6vw, 54px);
+      letter-spacing:-.5px;
+      line-height:1.05;
+    }
+    .lead{
+      margin:0;
+      color: var(--muted);
+      font-size: clamp(15px, 1.8vw, 18px);
+      line-height:1.6;
+      max-width: 62ch;
+    }
+    .highlight{
+      background: linear-gradient(90deg, rgba(247,213,29,.22), rgba(11,138,74,.22), rgba(216,30,43,.22));
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 2px 8px;
+      border-radius: 999px;
+      color: rgba(255,255,255,.9);
+      white-space:nowrap;
+    }
+
+    .cta-row{
+      display:flex; flex-wrap:wrap; gap:12px;
+      margin-top: 18px;
+      align-items:center;
+    }
+    .btn{
+      appearance:none; border:0; cursor:pointer;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 14px;
+      color: #0B0E17;
+      background: linear-gradient(90deg, var(--yellow), #FFE46B);
+      box-shadow: 0 20px 40px rgba(247,213,29,.18);
+      transform: translateZ(0);
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+      display:inline-flex; align-items:center; gap:10px;
+    }
+    .btn:hover{ transform: translateY(-2px); filter: brightness(1.02); box-shadow: 0 26px 55px rgba(247,213,29,.24); }
+    .btn:active{ transform: translateY(0px) scale(.99); }
+    .btn.secondary{
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.9);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow:none;
+    }
+    .btn.secondary:hover{ box-shadow: 0 20px 55px rgba(0,0,0,.22); }
+
+    /* Side card */
+    .side{
+      position:relative;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      padding: 18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      min-height: 320px;
+    }
+    .side h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+    .kpis{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    @media (max-width: 460px){
+      .kpis{ grid-template-columns: 1fr; }
+    }
+
+    .chip{
+      padding: 12px 12px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .chip strong{
+      display:block;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .chip span{
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.4;
+      display:block;
+    }
+
+    /* Decorative images */
+    .balloons{
+      position:absolute;
+      right: -35px;
+      bottom: -25px;
+      width: 280px;
+      opacity: .95;
+      transform-origin: 60% 80%;
+      animation: float 6.5s ease-in-out infinite;
+      filter: drop-shadow(0 26px 34px rgba(0,0,0,.45));
+      pointer-events:none;
+      user-select:none;
+    }
+    @keyframes float{
+      0%{ transform: translateY(0) rotate(-2deg) }
+      50%{ transform: translateY(-14px) rotate(2deg) }
+      100%{ transform: translateY(0) rotate(-2deg) }
+    }
+
+    .statues{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .photo{
+      border-radius: 22px;
+      overflow:hidden;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 18px 45px rgba(0,0,0,.30);
+      position:relative;
+      min-height: 170px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-start;
+    }
+    .photo img{
+      width:100%;
+      height: 100%;
+      object-fit: contain;
+      display:block;
+      transform: translateY(8px);
+      opacity: .95;
+    }
+    .photo .cap{
+      position:absolute;
+      left:12px; bottom:12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.85);
+      font-size: 12px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Footer */
+    .footer{
+      margin-top: 18px;
+      color: rgba(255,255,255,.65);
+      font-size: 12px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center; justify-content:space-between;
+      padding: 0 4px;
+    }
+    .footer a{
+      color: rgba(255,255,255,.80);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(255,255,255,.30);
+    }
+    .footer a:hover{ color: #fff; border-bottom-color: rgba(255,255,255,.65); }
+
+    /* Confetti canvas */
+    #confetti{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 30;
+    }
+
+    /* Scroll reveal */
+    .reveal{
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.in{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .glow{ display:none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="glow" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand" title="IMDF — Institut des Métiers du Digital et du Freelancing">
+        <img src="default-logo-dark.svg" alt="Logo IMDF" />
+        <div class="t">
+          <strong>IMDF</strong>
+          <span>Institut des Métiers du Digital et Freelancing</span>
+        </div>
+      </div>
+      <div class="pill" role="note" aria-label="Message de fin d’année">
+        <span class="dot" aria-hidden="true"></span>
+        <span><span id="year"></span> • Bonne fête de fin d’année 🇧🇯</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+      <article class="hero reveal">
+        <div class="badge">
+          <span class="flag" aria-hidden="true"></span>
+          <span>À la nation béninoise — de la part de <strong>IMDF</strong></span>
+        </div>
+
+        <h1>Bonne fête de <span class="highlight">fin d’année</span> !</h1>
+
+        <p class="lead">
+          Que cette fin d’année apporte <strong>paix</strong>, <strong>santé</strong> et <strong>prospérité</strong> à toutes les familles du Bénin.
+          IMDF vous souhaite une nouvelle année pleine d’opportunités, de réussite et d’innovation dans le digital.
+        </p>
+
+        <div class="cta-row">
+          <button class="btn" id="btnCelebrate" type="button">
+            🎉 Lancer la célébration
+          </button>
+          <button class="btn secondary" id="btnScroll" type="button" aria-label="Voir le message complet">
+            ✨ Découvrir le message
+          </button>
+        </div>
+
+        <img class="balloons" src="ballons-benin.jpg" alt="" aria-hidden="true"/>
+      </article>
+
+      <aside class="side reveal">
+        <h2>Message IMDF</h2>
+        <div class="kpis">
+          <div class="chip">
+            <strong>📚 Former</strong>
+            <span>Des talents prêts pour le monde du numérique et du freelance.</span>
+          </div>
+          <div class="chip">
+            <strong>🧠 Innover</strong>
+            <span>Créer, tester, apprendre — et bâtir des solutions utiles.</span>
+          </div>
+          <div class="chip">
+            <strong>🤝 Accompagner</strong>
+            <span>Un suivi concret pour transformer les compétences en résultats.</span>
+          </div>
+          <div class="chip">
+            <strong>🇧🇯 Inspirer</strong>
+            <span>Un digital béninois ambitieux, inclusif et durable.</span>
+          </div>
+        </div>
+
+        <div class="statues" aria-label="Symboles culturels">
+          <div class="photo">
+            <img src="0028100001659210312.png" alt="Statue" />
+            <div class="cap">Héritage & courage</div>
+          </div>
+          <div class="photo">
+            <img src="0187530001659208205.png" alt="Statue à cheval" />
+            <div class="cap">Force & fierté</div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>© <span id="year2"></span> IMDF • Institut des Métiers du Digital et Freelancing</span>
+          <span>Fait avec ❤️ pour le Bénin et dans le monde</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="reveal" style="margin-top:18px;">
+      <div class="hero" style="padding:18px 18px 16px;">
+        <div class="badge" style="margin-bottom:10px;">
+          <span class="flag" aria-hidden="true"></span>
+          <span>Vœux pour <strong id="nextYear"></strong></span>
+        </div>
+        <p class="lead" style="margin:0; max-width: 75ch;">
+          Que la nouvelle année soit un tremplin vers des projets solides, des collaborations sincères et une croissance
+          qui profite à tous. Ensemble, faisons rayonner le Bénin grâce aux métiers du digital.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Year
+    const now = new Date();
+    const y = now.getFullYear();
+    document.getElementById("year").textContent = y;
+    document.getElementById("year2").textContent = y;
+    document.getElementById("nextYear").textContent = (y + 1);
+
+    // Scroll reveal
+    const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries)=>{
+      for (const e of entries){
+        if (e.isIntersecting){
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // Buttons
+    document.getElementById("btnScroll").addEventListener("click", ()=>{
+      const last = document.querySelector("main section.reveal:last-of-type");
+      last?.scrollIntoView({behavior: prefersReduced ? "auto" : "smooth", block:"start"});
+    });
+
+    // Confetti
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    let W=0,H=0, confetti=[], raf=null;
+
+    function resize(){
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = canvas.width = Math.floor(window.innerWidth * dpr);
+      H = canvas.height = Math.floor(window.innerHeight * dpr);
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.scale(dpr,dpr);
+    }
+    window.addEventListener("resize", resize, {passive:true});
+    resize();
+
+    function rand(min,max){ return Math.random()*(max-min)+min; }
+
+    const palette = ["#0B8A4A","#F7D51D","#D81E2B","#FFFFFF"];
+
+    function popConfetti(amount=160){
+      const w = window.innerWidth, h = window.innerHeight;
+      for (let i=0;i<amount;i++){
+        confetti.push({
+          x: rand(0,w),
+          y: rand(-h*0.2, -20),
+          vx: rand(-1.2, 1.2),
+          vy: rand(2.2, 5.8),
+          r: rand(2, 5.5),
+          rot: rand(0, Math.PI*2),
+          vr: rand(-0.18, 0.18),
+          color: palette[(Math.random()*palette.length)|0],
+          life: rand(80, 160),
+          shape: Math.random() < 0.25 ? "circle" : "rect"
+        });
+      }
+      if (!raf) raf = requestAnimationFrame(tick);
+    }
+
+    function tick(){
+      ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+      const w = window.innerWidth, h = window.innerHeight;
+
+      for (let i=confetti.length-1; i>=0; i--){
+        const p = confetti[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+        p.vy += 0.02; // gravity
+        p.life -= 1;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+
+        if (p.shape === "circle"){
+          ctx.beginPath();
+          ctx.arc(0,0,p.r,0,Math.PI*2);
+          ctx.fill();
+        }else{
+          ctx.fillRect(-p.r, -p.r*0.7, p.r*2, p.r*1.4);
+        }
+        ctx.restore();
+
+        if (p.y > h + 30 || p.life <= 0) confetti.splice(i,1);
+      }
+
+      if (confetti.length){
+        raf = requestAnimationFrame(tick);
+      }else{
+        cancelAnimationFrame(raf);
+        raf = null;
+        ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+      }
+    }
+
+    document.getElementById("btnCelebrate").addEventListener("click", ()=>{
+      if (prefersReduced) return; // respect user preference
+      popConfetti(220);
+    });
+
+    // Auto tiny confetti once
+    if (!prefersReduced){
+      setTimeout(()=>popConfetti(90), 700);
+    }
+  </script>
+
+  <!--
+    Instructions:
+    - Mettez ce fichier HTML dans un dossier avec ces fichiers images (mêmes noms) :
+      1) default-logo-dark.svg
+      2) ballons-benin.jpg
+      3) 0028100001659210312.png
+      4) 0187530001659208205.png
+    - Puis ouvrez le HTML dans votre navigateur.
+  -->
+</body>
+</html>

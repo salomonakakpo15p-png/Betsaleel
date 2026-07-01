@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0B3D2E" />
+  <title>IMDF — Bonne fête de fin d’année au Bénin et dans le monde</title>
+  <style>
+    :root{
+      --bg0:#04140f;
+      --bg1:#071f17;
+      --glass: rgba(255,255,255,.08);
+      --glass2: rgba(255,255,255,.12);
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+
+      /* Benin vibes */
+      --green:#0bb35a;
+      --yellow:#ffd04a;
+      --red:#e7392f;
+
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 22px;
+      --radius2: 28px;
+      --max: 1200px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 10% 10%, rgba(11,179,90,.18), transparent 55%),
+        radial-gradient(1000px 650px at 92% 14%, rgba(255,208,74,.20), transparent 55%),
+        radial-gradient(900px 650px at 70% 92%, rgba(231,57,47,.16), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    /* --- Ambient sparkles + snow (CSS only) --- */
+    .fx{
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+      background:
+        radial-gradient(circle at 15% 12%, rgba(255,255,255,.12) 0 1px, transparent 2px),
+        radial-gradient(circle at 35% 22%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 62% 18%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 78% 28%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+        radial-gradient(circle at 90% 10%, rgba(255,255,255,.12) 0 1px, transparent 2px);
+      mix-blend-mode: screen;
+      opacity:.75;
+      filter: blur(.2px);
+      animation: twinkle 5.5s ease-in-out infinite;
+    }
+    .fx::before,
+    .fx::after{
+      content:"";
+      position:absolute; inset:-40% -10%;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.16) 0 1px, transparent 2px),
+        radial-gradient(circle, rgba(255,255,255,.12) 0 1px, transparent 2px),
+        radial-gradient(circle, rgba(255,255,255,.10) 0 1px, transparent 2px);
+      background-size: 140px 140px, 220px 220px, 320px 320px;
+      background-position: 0 0, 30px 70px, 90px 10px;
+      opacity:.35;
+      animation: snow 16s linear infinite;
+      transform: translate3d(0,-30%,0);
+    }
+    .fx::after{
+      opacity:.22;
+      filter: blur(.5px);
+      animation-duration: 24s;
+      animation-direction: reverse;
+    }
+
+    @keyframes snow{
+      from{ transform: translate3d(0,-30%,0); }
+      to{ transform: translate3d(0,30%,0); }
+    }
+    @keyframes twinkle{
+      0%,100%{opacity:.60}
+      50%{opacity:.95}
+    }
+
+    /* --- Layout --- */
+    .wrap{position:relative; z-index:1;}
+    .container{max-width:var(--max); margin:0 auto; padding:24px 18px 44px;}
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+      padding:14px 16px;
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border-radius: 999px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.20);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 0;
+    }
+    .logo{
+      width:44px; height:44px; border-radius: 14px;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,.24), transparent 55%),
+        linear-gradient(135deg, rgba(11,179,90,.85), rgba(255,208,74,.70), rgba(231,57,47,.80));
+      box-shadow: 0 12px 26px rgba(0,0,0,.28);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+      transform: rotate(25deg) translateX(-40%);
+      animation: shine 3.5s ease-in-out infinite;
+    }
+    @keyframes shine{
+      0%{ transform: rotate(25deg) translateX(-60%); opacity:.0}
+      35%{ opacity:.35}
+      60%{ opacity:.0}
+      100%{ transform: rotate(25deg) translateX(60%); opacity:.0}
+    }
+    .brand h1{
+      font-size:14px; margin:0;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.86);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand p{
+      margin:0; font-size:12px; color:var(--muted);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .chip{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      color: rgba(255,255,255,.85);
+      font-size:12px;
+    }
+    .flag{
+      width:10px; height:10px; border-radius:4px;
+      background: linear-gradient(90deg, var(--green) 0 40%, var(--yellow) 40% 70%, var(--red) 70% 100%);
+      box-shadow: 0 0 0 3px rgba(255,255,255,.06);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top:18px;
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(500px 240px at 15% 10%, rgba(11,179,90,.22), transparent 60%),
+        radial-gradient(480px 260px at 85% 15%, rgba(255,208,74,.18), transparent 60%),
+        radial-gradient(520px 280px at 70% 92%, rgba(231,57,47,.16), transparent 60%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 10px;
+      padding: 22px 18px 18px;
+      position:relative;
+      z-index: 10;
+    }
+    .heroCopy{
+      padding: 10px 8px 14px 8px;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.84);
+      animation: pop 1.2s ease both;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--yellow);
+      box-shadow: 0 0 18px rgba(255,208,74,.55);
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{ transform:scale(1); opacity:.9 }
+      50%{ transform:scale(1.45); opacity:1 }
+    }
+    .title{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 4.5vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-shadow: 0 18px 45px rgba(0,0,0,.35);
+      animation: rise 1.15s cubic-bezier(.2,.9,.2,1) both;
+      animation-delay: .05s;
+    }
+    @keyframes rise{
+      from{ opacity:0; transform: translateY(18px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+    .title span{
+      background: linear-gradient(90deg, rgba(255,255,255,.92), rgba(255,255,255,.75));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .subtitle{
+      max-width: 55ch;
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+      animation: fadeIn 1.1s ease both;
+      animation-delay: .12s;
+    }
+    @keyframes fadeIn{
+      from{ opacity:0 }
+      to{ opacity:1 }
+    }
+    .ctaRow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top: 12px;
+      animation: fadeIn 1.1s ease both;
+      animation-delay: .18s;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.92);
+      text-decoration:none;
+      font-weight: 650;
+      font-size: 13px;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .btn::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+      transform: rotate(25deg) translateX(-60%);
+      opacity:0;
+    }
+    .btn:hover{ transform: translateY(-2px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.22); }
+    .btn:hover::after{ opacity:1; animation: shine 1.2s ease; }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(11,179,90,.65), rgba(255,208,74,.55), rgba(231,57,47,.55));
+      border-color: rgba(255,255,255,.18);
+    }
+
+    /* Hero art */
+    .heroArt{
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      min-height: 360px;
+      padding: 8px 8px 0;
+      position:relative;
+      isolation:isolate;
+    }
+    .heroArt::before{
+      content:"";
+      position:absolute;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.16), transparent 60%),
+                  radial-gradient(circle at 60% 65%, rgba(11,179,90,.20), transparent 62%),
+                  radial-gradient(circle at 60% 35%, rgba(255,208,74,.18), transparent 62%),
+                  radial-gradient(circle at 40% 70%, rgba(231,57,47,.14), transparent 62%);
+      filter: blur(10px);
+      opacity:.9;
+      border-radius: 999px;
+      transform: translateY(35px);
+      z-index:0;
+    }
+    .statue{
+      width:min(280px, 60vw);
+      height:auto;
+      filter: drop-shadow(0 26px 60px rgba(0,0,0,.55));
+      transform-origin: 50% 100%;
+      animation: float 6.5s ease-in-out infinite;
+      z-index:2;
+    }
+    .student{
+      position:absolute;
+      right: 8px;
+      bottom: -10px;
+      width: min(300px, 62vw);
+      height:auto;
+      filter: drop-shadow(0 22px 50px rgba(0,0,0,.52));
+      transform-origin: 50% 100%;
+      animation: float2 7.2s ease-in-out infinite;
+      z-index:3;
+    }
+    @keyframes float{
+      0%,100%{ transform: translateY(0) rotate(-.5deg); }
+      50%{ transform: translateY(-10px) rotate(.7deg); }
+    }
+    @keyframes float2{
+      0%,100%{ transform: translateY(0) rotate(.6deg); }
+      50%{ transform: translateY(-12px) rotate(-.6deg); }
+    }
+
+    /* Decorations (SVG) */
+    .deco{
+      position:absolute;
+      pointer-events:none;
+      z-index:4;
+      opacity:.98;
+      filter: drop-shadow(0 18px 35px rgba(0,0,0,.35));
+    }
+    .orn1{ top:-10px; left: 30px; width: 70px; animation: swing 3.6s ease-in-out infinite; transform-origin: 50% 0%; }
+    .orn2{ top:-6px; left: 120px; width: 86px; animation: swing 4.2s ease-in-out infinite; transform-origin: 50% 0%; }
+    .ribbon{ top: 8px; right: 18px; width: 60px; opacity:.9; animation: ribbon 3.8s ease-in-out infinite; }
+    .star{ top: 52px; right: 76px; width: 34px; animation: sparkle 1.8s ease-in-out infinite; }
+    @keyframes swing{
+      0%,100%{ transform: rotate(-4deg) translateY(0); }
+      50%{ transform: rotate(5deg) translateY(3px); }
+    }
+    @keyframes ribbon{
+      0%,100%{ transform: rotate(8deg) translateY(0); }
+      50%{ transform: rotate(-8deg) translateY(4px); }
+    }
+    @keyframes sparkle{
+      0%,100%{ transform: scale(1); filter: drop-shadow(0 0 0 rgba(255,208,74,0)); }
+      50%{ transform: scale(1.25); filter: drop-shadow(0 0 18px rgba(255,208,74,.55)); }
+    }
+
+    /* Bottom section */
+    .bottom{
+      padding: 18px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      position:relative;
+    }
+    .bottomHead{
+      display:flex; gap:14px; align-items:flex-end; justify-content:space-between;
+      flex-wrap:wrap;
+      margin: 2px 0 14px;
+    }
+    .bottomHead h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: -.01em;
+    }
+    .bottomHead p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 65ch;
+    }
+
+    .services{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .card{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+      min-height: 120px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(220px 160px at 20% 0%, rgba(11,179,90,.22), transparent 70%),
+        radial-gradient(200px 160px at 90% 20%, rgba(255,208,74,.16), transparent 70%),
+        radial-gradient(200px 170px at 40% 120%, rgba(231,57,47,.14), transparent 70%);
+      opacity:.0;
+      transition: opacity .25s ease;
+      pointer-events:none;
+    }
+    .card:hover{
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,.22);
+      background: rgba(255,255,255,.07);
+    }
+    .card:hover::before{opacity:1}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size: 11px; letter-spacing:.09em; text-transform:uppercase;
+      color: rgba(255,255,255,.82);
+      margin-bottom: 10px;
+    }
+    .badge i{
+      width:10px; height:10px; border-radius:999px; display:inline-block;
+      background: var(--green);
+      box-shadow: 0 0 18px rgba(11,179,90,.45);
+    }
+    .card h3{
+      margin:0 0 6px;
+      font-size: 15px;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    /* Footer strip */
+    footer{
+      margin-top: 14px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding: 12px 2px 0;
+      color: rgba(255,255,255,.68);
+      font-size: 12px;
+      flex-wrap:wrap;
+    }
+    .treeRow{
+      display:flex; align-items:flex-end; gap: 10px;
+    }
+    .treeRow img{
+      width: 60px;
+      height:auto;
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,.35));
+      animation: tree 4.8s ease-in-out infinite;
+      transform-origin: 50% 100%;
+    }
+    .treeRow img:nth-child(2){ width: 76px; animation-duration: 5.6s; }
+    .treeRow img:nth-child(3){ width: 64px; animation-duration: 5.2s; }
+    @keyframes tree{
+      0%,100%{ transform: rotate(-1deg) translateY(0); }
+      50%{ transform: rotate(1deg) translateY(-3px); }
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .heroArt{ min-height: 340px; }
+      .student{ right: -4px; }
+      .services{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 520px){
+      header{ border-radius: 18px; }
+      .chip{ display:none; }
+      .heroGrid{ padding: 18px 14px 16px; }
+      .heroArt{ min-height: 320px; }
+      .orn1{ left: 14px; width: 62px; }
+      .orn2{ left: 88px; width: 78px; }
+      .services{ grid-template-columns: 1fr; }
+      .treeRow img{ width: 54px; }
+      .treeRow img:nth-child(2){ width: 68px; }
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important; scroll-behavior:auto !important; }
+      .fx::before,.fx::after{ display:none; }
+    }
+  
+    /* --- Entrance animations (on load) --- */
+    .enter{ animation: enterUp .9s cubic-bezier(.2,.9,.2,1) both; }
+    .enter.delay1{ animation-delay:.08s; }
+    .enter.delay2{ animation-delay:.16s; }
+    .enter.delay3{ animation-delay:.24s; }
+    .enter.delay4{ animation-delay:.32s; }
+
+    @keyframes enterUp{
+      from{ opacity:0; transform: translateY(14px) scale(.98); filter: blur(2px); }
+      to{ opacity:1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    /* --- Extra ornaments scattered --- */
+    .deco.soft{ opacity:.88; filter: drop-shadow(0 16px 34px rgba(0,0,0,.38)); }
+    .deco.floaty{ animation: drift 6.8s ease-in-out infinite; }
+    @keyframes drift{
+      0%,100%{ transform: translateY(0) rotate(-2deg); }
+      50%{ transform: translateY(-10px) rotate(2deg); }
+    }
+
+    /* Mid tree (circled area) */
+    .midTreeWrap{
+      position:absolute;
+      left: 26%;
+      top: 10%;
+      transform: translate(-50%,-50%);
+      width: 520px;
+      height: 520px;
+      z-index: 1;
+      pointer-events:none;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      opacity:.98;
+      animation: enterUp 1.05s cubic-bezier(.2,.9,.2,1) both;
+      animation-delay: .22s;
+    }
+    .midTreeWrap::before{
+      content:"";
+      position:absolute;
+      inset: -40px;
+      background:
+        radial-gradient(circle at 50% 70%, rgba(11,179,90,.38), transparent 55%),
+        radial-gradient(circle at 50% 55%, rgba(255,208,74,.22), transparent 60%),
+        radial-gradient(circle at 50% 60%, rgba(255,255,255,.10), transparent 65%);
+      filter: blur(10px);
+      opacity:.0;
+      animation: glow 2.4s ease-in-out infinite;
+    }
+    @keyframes glow{
+      0%,100%{ opacity:.15; transform: scale(.98); }
+      50%{ opacity:.65; transform: scale(1.02); }
+    }
+    .midTree{
+      width: 590px;
+      height:auto;
+      position:relative;
+      filter: drop-shadow(0 24px 55px rgba(0,0,0,.50));
+      transform-origin: 50% 100%;
+      animation: treePulse 2.6s ease-in-out infinite;
+    }
+    @keyframes treePulse{
+      0%,100%{ transform: translateY(0) rotate(-.4deg); filter: drop-shadow(0 24px 55px rgba(0,0,0,.50)) saturate(1); }
+      50%{ transform: translateY(-6px) rotate(.6deg); filter: drop-shadow(0 28px 70px rgba(0,0,0,.55)) saturate(1.25) brightness(1.05); }
+    }
+
+    /* Scatter positions */
+    .oTopLeft{ top: 110px; left: 18px; width: 46px; }
+    .oTopMid{ top: 86px; left: 54%; width: 36px; opacity:.82; }
+    .oMidLeft{ top: 250px; left: 42px; width: 56px; }
+    .oMidRight{ top: 220px; right: 44px; width: 44px; }
+    .oBottomMid{ bottom: 210px; left: 52%; width: 52px; opacity:.86; }
+    .oBottomLeft{ bottom: 260px; left: 18%; width: 40px; opacity:.78; }
+
+    /* Make hero a stage */
+    .hero{ isolation:isolate; }
+
+    /* Service cards: gentle entrance + stagger */
+    .services .card{
+      opacity:0;
+      transform: translateY(10px);
+      animation: enterUp .85s cubic-bezier(.2,.9,.2,1) both;
+    }
+    .services .card:nth-child(1){ animation-delay:.08s; }
+    .services .card:nth-child(2){ animation-delay:.16s; }
+    .services .card:nth-child(3){ animation-delay:.24s; }
+    .services .card:nth-child(4){ animation-delay:.32s; }
+
+    @media (max-width: 980px){
+      .midTreeWrap{
+        left: 12%;
+        top: 2%;
+        width: 420px; height: 420px;
+      }
+      .midTree{ width: 420px; }
+      .oTopMid{ left: 70%; }
+      .oBottomMid{ left: 70%; }
+    }
+    @media (max-width: 520px){
+      .midTreeWrap{
+        left: 20%;
+        top: 2%;
+        width: 420px; height: 420px;
+        opacity:.92;
+        z-index: 1;
+      }
+      .midTree{ width: 420px; }
+      .oTopMid, .oBottomMid{ display:none; }
+      .oMidRight{ right: 10px; }
+      .oMidLeft{ left: 10px; }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="fx" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="container">
+      <header class="enter">
+        <div class="brand" aria-label="IMDF">
+          <div class="logo" aria-hidden="true"></div>
+          <div style="min-width:0">
+            <h1>IMDF</h1>
+            <p>Institut des Métiers du Digital et Freelancing</p>
+          </div>
+        </div>
+        <div class="chip" aria-label="Bénin">
+          <span class="flag" aria-hidden="true"></span>
+          <span>Bonne fête de fin d’année 🇧🇯</span>
+        </div>
+      </header>
+
+      <main class="hero enter delay1" role="main">
+        <!-- Decorations -->
+        <img class="deco orn1" src="Fichier 1.svg" alt="" />
+        <img class="deco orn2" src="Fichier 3.svg" alt="" />
+        <img class="deco ribbon" src="Fichier 4.svg" alt="" />
+        <img class="deco star" src="Fichier 2.svg" alt="" />
+
+        <!-- Extra scattered ornaments (CSS only animations) -->
+        <img class="deco soft floaty oTopLeft enter delay2" src="Fichier 2.svg" alt="" />
+        <img class="deco soft floaty oTopMid enter delay3" src="Fichier 1.svg" alt="" />
+        <img class="deco soft floaty oMidLeft enter delay3" src="Fichier 3.svg" alt="" />
+        <img class="deco soft floaty oMidRight enter delay4" src="Fichier 22.svg" alt="" />
+        <img class="deco soft floaty oBottomMid enter delay2" src="Fichier 4.svg" alt="" />
+        <img class="deco soft floaty oBottomLeft enter delay4" src="Fichier 11.svg" alt="" />
+
+        <!-- Mid tree in the circled area -->
+        <div class="midTreeWrap" aria-hidden="true">
+          <img class="midTree" src="Fichier 21.svg" alt="" />
+        </div>
+
+        <div class="heroGrid">
+          <section class="heroCopy">
+            <div class="kicker"><span class="dot" aria-hidden="true"></span> Message de fin d’année</div>
+
+            <h2 class="title"><span>Bonne fête de fin d’année</span><br/>à toute la Nation béninoise</h2>
+
+            <p class="subtitle">
+              De la part de <strong>IMDF</strong>, nous vous souhaitons une année remplie de paix, de santé,
+              de réussite et de belles opportunités. Que le digital et l’innovation continuent d’ouvrir
+              des portes à notre jeunesse et à notre pays.
+            </p>
+
+            <div class="ctaRow" aria-label="Actions">
+              <a class="btn primary" href="#services" aria-label="Découvrir les services IMDF">
+                ✨ Découvrir IMDF
+              </a>
+              <a class="btn" href="#vœux" aria-label="Lire les vœux">
+                🎁 Lire les vœux
+              </a>
+            </div>
+
+            <div id="vœux" style="margin-top:16px; border:1px dashed rgba(255,255,255,.18); border-radius:18px; padding:14px; background:rgba(0,0,0,.12)">
+              <div style="display:flex; gap:10px; align-items:flex-start">
+                <span aria-hidden="true" style="font-size:18px; line-height:1">💛</span>
+                <div>
+                  <div style="font-weight:800; letter-spacing:.02em">Vœux IMDF</div>
+                  <div style="color:rgba(255,255,255,.75); font-size:13px; line-height:1.55">
+                    <strong>2026</strong> : courage, discipline, créativité — et surtout, solidarité.
+                    Ensemble, faisons grandir les compétences numériques au Bénin.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <aside class="heroArt" aria-label="Visuels IMDF">
+            <img class="statue enter delay2" src="0028100001659210312.png" alt="Statue symbolique" />
+            <img class="student enter delay3" src="lms-GL2lfo0F.png" alt="Apprenante IMDF" />
+          </aside>
+        </div>
+
+        <section id="services" class="bottom" aria-label="Services IMDF">
+          <div class="bottomHead">
+            <div>
+              <h2>Nos services, pour bâtir l’avenir</h2>
+              <p>Des parcours modernes, pratiques et orientés métier — pour apprendre, se certifier et réussir.</p>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; color:rgba(255,255,255,.75); font-size:12px">
+              <span class="flag" aria-hidden="true" style="width:12px;height:12px;border-radius:5px"></span>
+              <span>IMDF • Digital • Freelancing</span>
+            </div>
+          </div>
+
+          <div class="services">
+            <article class="card">
+              <div class="badge"><i aria-hidden="true"></i> Formation</div>
+              <h3>Développement Web & Mobile</h3>
+              <p>HTML/CSS, JavaScript, frameworks modernes, projets réels et mentoring.</p>
+            </article>
+
+            <article class="card">
+              <div class="badge"><i aria-hidden="true" style="background:var(--yellow); box-shadow:0 0 18px rgba(255,208,74,.45)"></i> E-learning</div>
+              <h3>Cours en ligne & Suivi</h3>
+              <p>Accès flexible, contenus structurés, exercices, évaluations et progression.</p>
+            </article>
+
+            <article class="card">
+              <div class="badge"><i aria-hidden="true" style="background:var(--red); box-shadow:0 0 18px rgba(231,57,47,.40)"></i> Freelancing</div>
+              <h3>Accompagnement carrière</h3>
+              <p>Portfolio, profil pro, propositions, méthodologie client et bonnes pratiques.</p>
+            </article>
+
+            <article class="card">
+              <div class="badge"><i aria-hidden="true"></i> Certification</div>
+              <h3>Compétences & Attestations</h3>
+              <p>Des parcours validés, orientés compétences, pour valoriser votre niveau.</p>
+            </article>
+          </div>
+
+          <footer>
+            <div class="treeRow" aria-hidden="true">
+              <img src="Fichier 21.svg" alt="" />
+              <img src="Fichier 21.svg" alt="" />
+              <img src="Fichier 21.svg" alt="" />
+            </div>
+            <div>
+              <strong>IMDF</strong> — Institut des Métiers du Digital et Freelancing •
+              <span style="color:rgba(255,255,255,.78)">Bonne fête à la Nation béninoise</span>
+            </div>
+          </footer>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
